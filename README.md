@@ -20,6 +20,6 @@ These are the results using:
 - Learning rate = 0.1
 - Sigma = 0.8 
 - Epochs = 5000
-`![alt text](imgs\Map_Euclidean.png)`
-`![alt text](imgs\History_Euclidean.png)`
+`![alt text](imgs/Map_Euclidean.png)`
+`![alt text](imgs/History_Euclidean.png)`
 
