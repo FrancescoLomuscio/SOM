@@ -15,6 +15,9 @@ from datetime import timedelta
 from multiprocessing import cpu_count, Process, Queue
 import matplotlib.pyplot as plt
 
+from datetime import datetime
+
+
 from sklearn.datasets import load_iris
 
 def _build_iteration_indexes(data_len, num_iterations, random_generator=None):
@@ -23,8 +26,19 @@ def _build_iteration_indexes(data_len, num_iterations, random_generator=None):
         random_generator.shuffle(iterations)
     return iterations
 
+def euclidean_distance(x, w):
+    return norm(np.subtract(x,w), axis = -1)
+
+def cosine_distance(x, w):
+    n = (x*w).sum(axis = 2)
+    d = np.multiply(norm(x), norm(w,axis=2))
+    return n / d
+
+def manhattan_distance(x, w):
+    return norm(np.subtract(x,w), ord=1, axis = -1)
+
 class SOM:
-    def __init__(self,x,y,input_dim,learning_rate,sigma,max_iter):
+    def __init__(self,x,y,input_dim,learning_rate,sigma,max_iter,distance_function):
         
         self._random_generator = np.random.RandomState(42)
         #Initialize class variables
@@ -34,6 +48,7 @@ class SOM:
         self._learning_rate = learning_rate
         self._sigma = sigma
         self._max_iter = max_iter
+        self._distance_function = distance_function
         
         self._history = []
         
@@ -57,33 +72,29 @@ class SOM:
     def get_weights(self):
         return self._weights
     
-    def euclidean_distance(self,x, w):
-        return norm(np.subtract(x,w), axis = -1)
-    
     def activate(self, x):
-        self._activation_map = self.euclidean_distance(x, self._weights)
+        self._activation_map = self._distance_function(x, self._weights)
     
     def choose_winner(self,x):
         self.activate(x)
         return np.unravel_index(self._activation_map.argmin(),
                              self._activation_map.shape)
         
+    def gaussian(self,c, sigma):
+        d = 2*np.pi*sigma*sigma
+        ax = np.exp(-np.power(self._xx-self._xx.T[c], 2)/d)
+        ay = np.exp(-np.power(self._yy-self._yy.T[c], 2)/d)
+        return (ax * ay).T
+        
     def update(self,x,win,t,max_iter):
         lr = self.decay(self._learning_rate,t,max_iter)
         sigma = self.decay(self._sigma,t,max_iter)
         
-        g = self._gaussian(win, sigma)*lr
+        g = self.gaussian(win, sigma)*lr
         
         self._weights += np.einsum('ij, ijk->ijk', g, x-self._weights)
         return self._weights
-    
-    def _gaussian(self, c, sigma):
-        d = 2*np.pi*sigma*sigma
-        ax = np.exp(-np.power(self._xx-self._xx.T[c], 2)/d)
-        ay = np.exp(-np.power(self._yy-self._yy.T[c], 2)/d)
-        return (ax * ay).T 
-    
-        
+            
     def train(self, data):
         iterations = _build_iteration_indexes(len(data), self._max_iter, 
                                               self._random_generator)
@@ -155,11 +166,33 @@ class SOM:
         return np.sqrt(-2 * cross_term + input_data_sq + weights_flat_sq.T)
     
 def main():
-    som = SOM(10,10,4,0.1,0.8,10000)
     iris = load_iris()
-    x = iris.data[:, :]  
+    x = iris.data[:, :]
+    print("EUCLIDEAN DISTANCE")
+    start_1=datetime.now()
+    som = SOM(7,7,np.shape(x)[1],0.1,0.8,5000,euclidean_distance)
     y = iris.target
     som.train(x)
     som.plot(x,y)
+    time_1 = datetime.now()-start_1
+    print(time_1)
+    
+    print("COSINE DISTANCE")
+    start_2=datetime.now()
+    som = SOM(7,7,np.shape(x)[1],0.1,0.8,500,cosine_distance)
+    y = iris.target
+    som.train(x)
+    som.plot(x,y)
+    time_2 = datetime.now()-start_2
+    print(time_2)
+    
+    print("MANHATTAN DISTANCE")
+    start_3=datetime.now()
+    som = SOM(7,7,np.shape(x)[1],0.1,0.8,5000,manhattan_distance)
+    y = iris.target
+    som.train(x)
+    som.plot(x,y)
+    time_3 = datetime.now()-start_3
+    print(time_3)
 
 main()
