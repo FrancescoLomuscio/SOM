@@ -14,12 +14,48 @@ som = SOM(7,7,np.shape(x)[1],0.1,0.8,5000,euclidean_distance)
 `
 
 ---
-These are the results using:
+These are the results on the Iris Dataset using:
 
 - Euclidean Distance
 - Learning rate = 0.1
 - Sigma = 0.8 
 - Epochs = 5000
-`![alt text](imgs/Map_Euclidean.png)`
-`![alt text](imgs/History_Euclidean.png)`
 
+MAP:
+
+![alt text](imgs/Map_Euclidean.png)
+
+QUANTIZATION ERROR:
+
+![alt text](imgs/History_Euclidean.png)
+
+---
+These are the results on the Iris Dataset using:
+
+- Cosine Distance
+- Learning rate = 0.1
+- Sigma = 0.8 
+- Epochs = 500
+
+MAP:
+
+![alt text](imgs/Map_Cosine.png)
+
+QUANTIZATION ERROR:
+
+![alt text](imgs/History_Cosine.png)
+---
+These are the results on the Iris Dataset using:
+
+- Manhattan Distance
+- Learning rate = 0.1
+- Sigma = 0.8 
+- Epochs = 5000
+
+MAP:
+
+![alt text](imgs/Map_Manhattan.png)
+
+QUANTIZATION ERROR:
+
+![alt text](imgs/History_Manhattan.png)
