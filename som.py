@@ -123,10 +123,11 @@ class SOM:
             w = self.choose_winner(xx)
             ax.plot(w[1] + .5 + 0.1 * np.random.randn(1), w[0] + .5 + 0.1 * np.random.randn(1),
                     markers[targets[cnt]], color=c, markersize=12)
-        
+        #plt.savefig("Map")
         plt.show()
         
         plt.plot(self._history)
+        #plt.savefig("History")
         
                 
     def winner_map(self, data):
@@ -176,23 +177,5 @@ def main():
     som.plot(x,y)
     time_1 = datetime.now()-start_1
     print(time_1)
-    
-    print("COSINE DISTANCE")
-    start_2=datetime.now()
-    som = SOM(7,7,np.shape(x)[1],0.1,0.8,500,cosine_distance)
-    y = iris.target
-    som.train(x)
-    som.plot(x,y)
-    time_2 = datetime.now()-start_2
-    print(time_2)
-    
-    print("MANHATTAN DISTANCE")
-    start_3=datetime.now()
-    som = SOM(7,7,np.shape(x)[1],0.1,0.8,5000,manhattan_distance)
-    y = iris.target
-    som.train(x)
-    som.plot(x,y)
-    time_3 = datetime.now()-start_3
-    print(time_3)
 
 main()
