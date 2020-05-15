@@ -23,7 +23,7 @@ These are the results on the Iris Dataset using:
 
 MAP                        |  QUANTIZATION ERROR
 :-------------------------:|:-------------------------:
-![](imgs/Map_Euclidean.png)  |  ![](imgs/History_Euclidean.png)
+![](imgs/iris/Map_Euclidean.png)  |  ![](imgs/iris/History_Euclidean.png)
 
 ---
 These are the results on the Iris Dataset using:
@@ -35,7 +35,7 @@ These are the results on the Iris Dataset using:
 
 MAP                        |  QUANTIZATION ERROR
 :-------------------------:|:-------------------------:
-![](imgs/Map_Cosine.png)  |  ![](imgs/History_Cosine.png)
+![](imgs/iris/Map_Cosine.png)  |  ![](imgs/iris/History_Cosine.png)
 
 ---
 These are the results on the Iris Dataset using:
@@ -47,4 +47,38 @@ These are the results on the Iris Dataset using:
 
 MAP                        |  QUANTIZATION ERROR
 :-------------------------:|:-------------------------:
-![](imgs/Map_Manhattan.png)  |  ![](imgs/History_Manhattan.png)
+![](imgs/iris/Map_Manhattan.png)  |  ![](imgs/iris/History_Manhattan.png)
+
+---
+These are the results on the Digits Dataset using:
+
+- Euclidean Distance
+- Learning rate = 0.1
+- Sigma = 0.8 
+- Epochs = 5000
+
+MAP                        |  QUANTIZATION ERROR
+:-------------------------:|:-------------------------:
+![](imgs/digits/Map_Euclidean.png)  |  ![](imgs/digits/History_Euclidean.png)
+---
+These are the results on the Digits Dataset using:
+
+- Cosine Distance
+- Learning rate = 0.1
+- Sigma = 0.8 
+- Epochs = 5000
+
+MAP                        |  QUANTIZATION ERROR
+:-------------------------:|:-------------------------:
+![](imgs/digits/Map_Cosine.png)  |  ![](imgs/digits/History_Cosine.png)
+---
+These are the results on the Digits Dataset using:
+
+- Manhattan Distance
+- Learning rate = 0.1
+- Sigma = 0.8 
+- Epochs = 5000
+
+MAP                        |  QUANTIZATION ERROR
+:-------------------------:|:-------------------------:
+![](imgs/digits/Map_Manhattan.png)  |  ![](imgs/digits/History_Manhattan.png)
