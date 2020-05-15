@@ -22,6 +22,7 @@ from sklearn.datasets import load_iris
 from sklearn.datasets import load_digits
 
 
+
 def _build_iteration_indexes(data_len, num_iterations, random_generator=None):
     iterations = np.arange(num_iterations) % data_len
     if random_generator:
@@ -169,8 +170,8 @@ class SOM:
         return np.sqrt(-2 * cross_term + input_data_sq + weights_flat_sq.T)
     
 def main():
-    #dataset = load_iris()
-    dataset = load_digits()
+    dataset = load_iris()
+    #dataset = load_digits()
 
     x = dataset.data[:, :]
     print("EUCLIDEAN DISTANCE")
