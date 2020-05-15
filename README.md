@@ -21,13 +21,9 @@ These are the results on the Iris Dataset using:
 - Sigma = 0.8 
 - Epochs = 5000
 
-MAP:
-
-![alt text](imgs/Map_Euclidean.png)
-
-QUANTIZATION ERROR:
-
-![alt text](imgs/History_Euclidean.png)
+MAP                        |  QUANTIZATION ERROR
+:-------------------------:|:-------------------------:
+![](imgs/Map_Euclidean.png)  |  ![](imgs/History_Euclidean.png)
 
 ---
 These are the results on the Iris Dataset using:
@@ -37,13 +33,10 @@ These are the results on the Iris Dataset using:
 - Sigma = 0.8 
 - Epochs = 500
 
-MAP:
+MAP                        |  QUANTIZATION ERROR
+:-------------------------:|:-------------------------:
+![](imgs/Map_Cosine.png)  |  ![](imgs/History_Cosine.png)
 
-![alt text](imgs/Map_Cosine.png)
-
-QUANTIZATION ERROR:
-
-![alt text](imgs/History_Cosine.png)
 ---
 These are the results on the Iris Dataset using:
 
@@ -52,10 +45,6 @@ These are the results on the Iris Dataset using:
 - Sigma = 0.8 
 - Epochs = 5000
 
-MAP:
-
-![alt text](imgs/Map_Manhattan.png)
-
-QUANTIZATION ERROR:
-
-![alt text](imgs/History_Manhattan.png)
+MAP                        |  QUANTIZATION ERROR
+:-------------------------:|:-------------------------:
+![](imgs/Map_Manhattan.png)  |  ![](imgs/History_Manhattan.png)
