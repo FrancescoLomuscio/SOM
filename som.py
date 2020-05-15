@@ -19,6 +19,8 @@ from datetime import datetime
 
 
 from sklearn.datasets import load_iris
+from sklearn.datasets import load_digits
+
 
 def _build_iteration_indexes(data_len, num_iterations, random_generator=None):
     iterations = np.arange(num_iterations) % data_len
@@ -106,13 +108,13 @@ class SOM:
         print("Training FINITO\n")
             
     def plot(self,data,targets):
-        colors = ['#EDB233', '#90C3EC', '#C02942', '#79BD9A', '#774F38', 'gray', 'black']
-        markers = ['o'] * 3
+        colors = ['blue', 'red', 'orange', 'green', 'purple', 'brown', 'pink', 'grey', 'olive', 'cyan']
+        markers = ['o'] * 10
         
         wm = self.winner_map(data)
         fig, ax = plt.subplots(figsize=(self._x,self._y))
         plt.pcolormesh(wm, edgecolors=None)
-        #plt.colorbar()
+        plt.colorbar()
         plt.xticks(np.arange(.5, self._x + .5), range(self._x))
         plt.yticks(np.arange(.5, self._y + .5), range(self._y))
         #ax.set_aspect('equal')
@@ -167,15 +169,33 @@ class SOM:
         return np.sqrt(-2 * cross_term + input_data_sq + weights_flat_sq.T)
     
 def main():
-    iris = load_iris()
-    x = iris.data[:, :]
+    #dataset = load_iris()
+    dataset = load_digits()
+
+    x = dataset.data[:, :]
     print("EUCLIDEAN DISTANCE")
     start_1=datetime.now()
-    som = SOM(7,7,np.shape(x)[1],0.1,0.8,5000,euclidean_distance)
-    y = iris.target
+    som = SOM(5,5,np.shape(x)[1],0.1,0.8,5000,euclidean_distance)
+    y = dataset.target
     som.train(x)
     som.plot(x,y)
     time_1 = datetime.now()-start_1
     print(time_1)
+    
+    print("COSINE DISTANCE")
+    start_2=datetime.now()
+    som = SOM(5,5,np.shape(x)[1],0.1,0.8,5000,cosine_distance)
+    som.train(x)
+    som.plot(x,y)
+    time_2 = datetime.now()-start_2
+    print(time_2)
+    
+    print("MANHATTAN DISTANCE")
+    start_3=datetime.now()
+    som = SOM(5,5,np.shape(x)[1],0.1,0.8,5000,manhattan_distance)
+    som.train(x)
+    som.plot(x,y)
+    time_3 = datetime.now()-start_3
+    print(time_3)
 
 main()
